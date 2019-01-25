@@ -72,7 +72,7 @@ public class CameraControllerPolar : MonoBehaviour
             transform.position = _sphericalCoordinate.Rotate(_mov.x * _speed * Time.deltaTime, _mov.y * _speed * Time.deltaTime).toCartesian + _pivotPoint.position;
 
         // temporal zoom in, zoom out
-        if (_zoom != 0)
+       if (_zoom != 0)
             transform.position = _sphericalCoordinate.TranslateRadius(_zoom * Time.deltaTime * _scrollSpeed).toCartesian + _pivotPoint.position;
 
         //_distanceToPivot = (_camera.transform.position - _pivotPoint.transform.position).magnitude;
