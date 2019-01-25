@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour
     Camera _camera;
 
     [SerializeField]
-    [Header("Pivot point for the camera")]\
+    [Header("Pivot point for the camera")]
     [Tooltip("The pivot forward will set the camera forward")]
     Transform _pivotPoint;
 
