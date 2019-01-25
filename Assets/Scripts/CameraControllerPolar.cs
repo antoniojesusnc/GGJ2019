@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-[ExecuteAlways]
 public class CameraControllerPolar : MonoBehaviour
 {
     Camera _camera;
