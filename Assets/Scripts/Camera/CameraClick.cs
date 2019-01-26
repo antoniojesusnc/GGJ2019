@@ -17,6 +17,8 @@ public class CameraClick : MonoBehaviour
     [SerializeField]
     List<Transform> _walls;
 
+    HideWithWallObject _door; 
+
     [SerializeField]
     float _timeToShowWalls;
     [SerializeField]
@@ -36,6 +38,8 @@ public class CameraClick : MonoBehaviour
             if (!_walls[i].gameObject.activeSelf)
                 _walls[i].gameObject.SetActive(true);
         }
+
+        _door = FindObjectOfType<HideWithWallObject>();
     }
 
     void Update()
@@ -56,14 +60,30 @@ public class CameraClick : MonoBehaviour
         _walls.Sort(SortByCameraDistance);
 
         if (!LeanTween.isTweening(_walls[0].gameObject))
+        {
             LeanTween.alpha(_walls[0].gameObject, 0, _timeToHideWalls);
+            if(_door.Wall.transform == _walls[0])
+                LeanTween.alpha(_door.gameObject, 0, _timeToHideWalls);
+        }
         if (!LeanTween.isTweening(_walls[1].gameObject))
+        {
             LeanTween.alpha(_walls[1].gameObject, 0, _timeToHideWalls);
+            if (_door.Wall.transform == _walls[1])
+                LeanTween.alpha(_door.gameObject, 0, _timeToHideWalls);
+        }
 
         if (!LeanTween.isTweening(_walls[2].gameObject))
+        {
             LeanTween.alpha(_walls[2].gameObject, 1, _timeToShowWalls);
+            if (_door.Wall.transform == _walls[2])
+                LeanTween.alpha(_door.gameObject, 1, _timeToHideWalls);
+        }
         if (!LeanTween.isTweening(_walls[3].gameObject))
+        {
             LeanTween.alpha(_walls[3].gameObject, 1, _timeToShowWalls);
+            if (_door.Wall.transform == _walls[3])
+                LeanTween.alpha(_door.gameObject, 1, _timeToHideWalls);
+        }
     }
 
     private int SortByCameraDistance(Transform wall1, Transform wall2)

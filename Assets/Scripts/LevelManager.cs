@@ -56,7 +56,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
         {
             temp = new BadObjectsInfo();
             temp.Obj = objects[i];
-            temp.Points = objects[i].GetComponent<ActivableObjects>().GetPointsToCheck();
+            temp.Points = objects[i].GetComponent<BadObjects>().GetPointsToCheck();
 
             _badObjects.Add(temp);
         }

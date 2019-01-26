@@ -62,34 +62,6 @@ public class ActivableObjects : MonoBehaviour
         _currentState = initialState == ObjectState.Pos1 ? ObjectState.Pos2 : ObjectState.Pos1;
     }
 
-    public List<Vector3> GetPointsToCheck()
-    {
-        List<Vector3> points = new List<Vector3>();
-
-        Transform child;
-        for (int i = transform.childCount - 1; i >= 0; --i)
-        {
-            child = transform.GetChild(i);
-            if (child.GetComponent<SphereCollider>() != null)
-                points.Add(child.position);
-
-        }
-
-        return points;
-
-        /*
-        temp.Points.Add(bound.center + new Vector3(bound.extents.x, bound.extents.y, bound.extents.z));
-        temp.Points.Add(bound.center + new Vector3(bound.extents.x, -bound.extents.y, bound.extents.z));
-        temp.Points.Add(bound.center + new Vector3(bound.extents.x, bound.extents.y, -bound.extents.z));
-        temp.Points.Add(bound.center + new Vector3(bound.extents.x, -bound.extents.y, -bound.extents.z));
-
-        temp.Points.Add(bound.center + new Vector3(-bound.extents.x, bound.extents.y, bound.extents.z));
-        temp.Points.Add(bound.center + new Vector3(-bound.extents.x, -bound.extents.y, bound.extents.z));
-        temp.Points.Add(bound.center + new Vector3(-bound.extents.x, bound.extents.y, -bound.extents.z));
-        temp.Points.Add(bound.center + new Vector3(-bound.extents.x, -bound.extents.y, -bound.extents.z));
-        */
-    }
-
     public void SetOutline(int color)
     {
         if (_outline != null)
