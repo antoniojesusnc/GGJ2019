@@ -167,9 +167,10 @@ public class LevelManager : SingletonGameObject<LevelManager>
     {
         _timeStampAutoCheck = 0;
         bool allObjectsHidden = CheckIfAllObjectsHidden();
+        bool allObjectsInCorrectPosition = CheckIfAllObjectsInCorrectPosition();
 
         // victory
-        if (allObjectsHidden)
+        if (allObjectsHidden && allObjectsInCorrectPosition)
         {
             Victory();
         }
@@ -267,6 +268,19 @@ public class LevelManager : SingletonGameObject<LevelManager>
         }
 
         return !hitAnyObject;
+    }
+
+    private bool CheckIfAllObjectsInCorrectPosition()
+    {
+        bool allCorrect = true;
+
+        var activableObjects = GameObject.FindObjectsOfType<ActivableObjects>();
+        for (int i = activableObjects.Length- 1; allCorrect && i >= 0; i--)
+        {
+            allCorrect = activableObjects[i].IsInSuccessState;
+        }
+
+        return allCorrect;
     }
 
     private void OnDrawGizmos()
