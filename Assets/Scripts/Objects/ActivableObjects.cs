@@ -24,7 +24,7 @@ public class ActivableObjects : MonoBehaviour
     float _timeRotation;
 
     [SerializeField]
-    Transform _secondPosAndRot;
+    protected Transform _secondPosAndRot;
     [SerializeField]
     Transform _thirdPosAndRot;
 
@@ -52,7 +52,7 @@ public class ActivableObjects : MonoBehaviour
     Vector3 _originalPosition;
     Quaternion _originalRotation;
 
-    ObjectState _currentState;
+    protected ObjectState _currentState;
 
     QuickOutline _outline;
 
@@ -72,22 +72,22 @@ public class ActivableObjects : MonoBehaviour
 
         if (_currentState == ObjectState.Pos1)
         {
-            StartCoroutine(MoveToCo(_secondPosAndRot.position, _secondPosAndRot.rotation, ObjectState.Pos2));
+            StartCoroutine(MoveToNextStateCo(_secondPosAndRot.position, _secondPosAndRot.rotation, ObjectState.Pos2));
         }
         else if (_currentState == ObjectState.Pos2)
         {
             if (_thirdPosAndRot != null)
-                StartCoroutine(MoveToCo(_thirdPosAndRot.position, _thirdPosAndRot.rotation, ObjectState.Pos3));
+                StartCoroutine(MoveToNextStateCo(_thirdPosAndRot.position, _thirdPosAndRot.rotation, ObjectState.Pos3));
             else
-                StartCoroutine(MoveToCo(_originalPosition, _originalRotation, ObjectState.Pos1));
+                StartCoroutine(MoveToNextStateCo(_originalPosition, _originalRotation, ObjectState.Pos1));
         }
         else
         {
-            StartCoroutine(MoveToCo(_originalPosition, _originalRotation, ObjectState.Pos1));
+            StartCoroutine(MoveToNextStateCo(_originalPosition, _originalRotation, ObjectState.Pos1));
         }
     }
 
-    private IEnumerator MoveToCo(Vector3 position, Quaternion rotation, ObjectState newState)
+    protected virtual IEnumerator MoveToNextStateCo(Vector3 position, Quaternion rotation, ObjectState newState)
     {
         _inTransition = true;
 
