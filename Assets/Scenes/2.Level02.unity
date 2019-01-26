@@ -213,7 +213,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 1745864336}
+      objectReference: {fileID: 945551904}
     - target: {fileID: 1574645101317020595, guid: fe00c5fe312fc3e4ea1fef92c98d6858,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -333,13 +333,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8765661390317955961}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1155273744 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8765661390208378651, guid: 8456c0e80af879b408e9828d02ae01d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 8765661390317955961}
-  m_PrefabAsset: {fileID: 0}
---- !u!84 &1529193214
+--- !u!84 &945551904
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -351,8 +345,8 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
-  m_Width: 1319
-  m_Height: 620
+  m_Width: 1330
+  m_Height: 631
   m_AntiAliasing: 1
   m_DepthFormat: 1
   m_ColorFormat: 7
@@ -371,13 +365,19 @@ RenderTexture:
     m_WrapW: 1
   m_Dimension: 2
   m_VolumeDepth: 1
+--- !u!4 &1155273744 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8765661390208378651, guid: 8456c0e80af879b408e9828d02ae01d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8765661390317955961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1712080999 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8765661391828318623, guid: 8456c0e80af879b408e9828d02ae01d2,
     type: 3}
   m_PrefabInstance: {fileID: 8765661390317955961}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1745864336
+--- !u!84 &1800904935
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -389,8 +389,8 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
-  m_Width: 1319
-  m_Height: 620
+  m_Width: 1330
+  m_Height: 631
   m_AntiAliasing: 1
   m_DepthFormat: 1
   m_ColorFormat: 7
