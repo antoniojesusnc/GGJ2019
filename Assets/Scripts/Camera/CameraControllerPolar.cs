@@ -97,9 +97,13 @@ public class CameraControllerPolar : MonoBehaviour
         transform.LookAt(_pivotPoint);
     }
 
-    private void OnDrawGizmos()
+    public void SetFakeMovement(Vector2 fakeSpeed, float fakeZoomSpeed)
     {
-
+        _doFakeMovement = true;
+        _fakeMovement = fakeSpeed;
+        _zoom = 1;
+        _scrollSpeed = fakeZoomSpeed;
+        GetComponent<CameraClick>().DisableClick();
     }
 
 

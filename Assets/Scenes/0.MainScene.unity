@@ -112,38 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!84 &18805649
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 640
-  m_Height: 648
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 7
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &28073601
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +366,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1367467434}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &678599259
+--- !u!84 &863480365
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1038,7 +1006,7 @@ PrefabInstance:
     - target: {fileID: 1501785315, guid: 963b5236678e84745939683e7c69491d, type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 678599259}
+      objectReference: {fileID: 863480365}
     - target: {fileID: 1501785315, guid: 963b5236678e84745939683e7c69491d, type: 3}
       propertyPath: m_Depth
       value: 1
@@ -1118,6 +1086,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1758812375
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 640
+  m_Height: 648
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 7
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1943374526 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8765661390762454476, guid: 8456c0e80af879b408e9828d02ae01d2,
@@ -1353,22 +1353,22 @@ PrefabInstance:
     - target: {fileID: 2968382177104700051, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 114
       objectReference: {fileID: 0}
     - target: {fileID: 2968382177104700051, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2968382177104700051, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2968382177104700051, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -449
       objectReference: {fileID: 0}
     - target: {fileID: 4333714414866350079, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}
@@ -1423,22 +1423,22 @@ PrefabInstance:
     - target: {fileID: 6058110719524589202, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 114
       objectReference: {fileID: 0}
     - target: {fileID: 6058110719524589202, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6058110719524589202, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6058110719524589202, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -579.2
       objectReference: {fileID: 0}
     - target: {fileID: 6597907836386717432, guid: 13d186b65419d8f4f99c8d3fca9f10d2,
         type: 3}

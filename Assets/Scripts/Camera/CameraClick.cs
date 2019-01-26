@@ -23,7 +23,7 @@ public class CameraClick : MonoBehaviour
     float _timeToHideWalls;
 
     [SerializeField]
-    bool _checkClicks;
+    bool _checkClicks = true;
 
     ActivableObjects _lastSelected;
 
@@ -114,5 +114,10 @@ public class CameraClick : MonoBehaviour
                 _lastSelected.SetOutline(OutlineNotSelected);
             }
         }
+    }
+
+    public void DisableClick()
+    {
+        _checkClicks = false;
     }
 }
