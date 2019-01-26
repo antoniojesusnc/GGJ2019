@@ -1,18 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HideWithWallObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public Renderer Wall
     {
-        
+        get
+        {
+            return _wall;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    Renderer _wall;
+
+    Renderer _renderer;
 }
