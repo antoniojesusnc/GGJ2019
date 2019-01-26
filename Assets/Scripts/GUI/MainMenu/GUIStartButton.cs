@@ -6,11 +6,6 @@ using UnityEngine;
 public class GUIStartButton : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -21,16 +16,16 @@ public class GUIStartButton : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) ||
             Input.GetKeyDown(KeyCode.Caret))
         {
-            GoToMainScene();
+            GoToFirstLevel();
         }
     }
     public void OnClick()
     {
-        GoToMainScene();
+        GoToFirstLevel();
     }
 
-    private void GoToMainScene()
+    private void GoToFirstLevel()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        FindObjectOfType<GUIMainMenu>().LoadLevel(1);
     }
 }

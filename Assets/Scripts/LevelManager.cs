@@ -21,9 +21,12 @@ public class LevelManager : SingletonGameObject<LevelManager>
 
     BadObjectsInfo _lastObjectDetected;
 
+    public float ElapsedTime { get; private set; }
+
     void Start()
     {
         FillObjects();
+        ElapsedTime = 0;
     }
 
     private void FillObjects()
@@ -64,6 +67,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
             return;
         }
 
+        ElapsedTime += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -90,10 +94,13 @@ public class LevelManager : SingletonGameObject<LevelManager>
     {
         bool allObjectsHidden = CheckIfAllObjectsHidden();
 
+        // victory
         if (allObjectsHidden)
         {
             IsGameFinished = true;
             GUIGameManager.Instance.Victory();
+            GameManager.Instance.UpdateBestTime(GameManager.Instance.CurrentLevel, ElapsedTime);
+            GameManager.Instance.SetLevelAsUnlock(GameManager.Instance.CurrentLevel+1);
         }
         else
         {
