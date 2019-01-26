@@ -189,6 +189,7 @@ Shader "Hidden/OutlineEffect"
 					if (sample1.r > h || sample2.r > h || sample3.r > h || sample4.r > h ||
 						sample5.r > h || sample6.r > h || sample7.r > h || sample8.r > h)
 					{
+					
 						outline = _LineColor1 * _LineIntensity * _LineColor1.a;
 						if (outsideDark)
 							originalPixel *= 1 - _LineColor1.a;
@@ -196,6 +197,7 @@ Shader "Hidden/OutlineEffect"
 
 						if (!outside)
 							outline *= _FillAmount1;
+							
 					}
 					else if (sample1.g > h || sample2.g > h || sample3.g > h || sample4.g > h ||
 						sample5.g > h || sample6.g > h || sample7.g > h || sample8.g > h)
