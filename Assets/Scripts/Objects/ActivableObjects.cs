@@ -63,6 +63,9 @@ public class ActivableObjects : MonoBehaviour
 
     public void SetOutline(int color)
     {
-        _outline.color = color;
+        if (_outline != null)
+            _outline.color = color;
+        else
+            Debug.Log("Uou have to add the outline");
     }
 }
