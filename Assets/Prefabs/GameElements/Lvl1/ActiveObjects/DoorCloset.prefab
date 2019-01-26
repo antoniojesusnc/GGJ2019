@@ -29,7 +29,9 @@ MonoBehaviour:
   _timeMovement: 2
   _timeRotation: 2
   _secondPosAndRot: {fileID: 7891305823070078509}
---- !u!114 &7891305824444550407
+  _thirdPosAndRot: {fileID: 0}
+  _successState: 0
+--- !u!114 &2275833261068295619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -38,13 +40,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7891305823041745959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 1
-  eraseRenderer: 0
-  originalLayer: 0
-  originalMaterials: []
+  outlineMode: 0
+  outlineColor: {r: 0.98039216, g: 0.8747652, b: 0.043137226, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!64 &7891305823801106068
 MeshCollider:
   m_ObjectHideFlags: 0

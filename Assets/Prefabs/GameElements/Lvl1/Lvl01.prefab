@@ -663,7 +663,8 @@ PrefabInstance:
       propertyPath: _secondPosAndRot
       value: 
       objectReference: {fileID: 5060258090858639759}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7891305823801106068, guid: 07500d3f6d1d8ce4fa285a9b756af4c8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 07500d3f6d1d8ce4fa285a9b756af4c8, type: 3}
 --- !u!4 &5060258090858639759 stripped
 Transform:
@@ -764,7 +765,8 @@ PrefabInstance:
       propertyPath: _secondPosAndRot
       value: 
       objectReference: {fileID: 5060258089526574054}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8174801119428584749, guid: 898582459be51a04b932984cddb3850f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 898582459be51a04b932984cddb3850f, type: 3}
 --- !u!4 &5060258089526574054 stripped
 Transform:
@@ -1959,7 +1961,8 @@ PrefabInstance:
       propertyPath: _secondPosAndRot
       value: 
       objectReference: {fileID: 5060258090394757078}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3158399641861770747, guid: b3152a7a167480e4ab8a3cfee07535cc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b3152a7a167480e4ab8a3cfee07535cc, type: 3}
 --- !u!4 &5060258089420083439 stripped
 Transform:
