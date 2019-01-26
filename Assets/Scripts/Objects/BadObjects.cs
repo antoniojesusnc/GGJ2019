@@ -1,15 +1,20 @@
-﻿using System.Collections;
+﻿using cakeslice;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BadObjects : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Outline _outline;
+
     void Start()
     {
-        
+        _outline = GetComponent<Outline>();
     }
 
-    // Update is called once per frame
-   
+    public void SetOutline(bool enableOutline)
+    {
+        _outline.enabled = enableOutline;
+    }
 }

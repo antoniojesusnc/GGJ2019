@@ -56,7 +56,7 @@ public class GameManager : SingletonGameObject<GameManager>
         var temp = GetBestTimeInfo(level);
         if (temp == null)
         {
-            Debug.LogError("Level Not found: " + level);
+            Debug.LogWarning("Level Not found: " + level);
             return 0;
         }
 
@@ -68,7 +68,7 @@ public class GameManager : SingletonGameObject<GameManager>
         var temp = GetBestTimeInfo(level);
         if (temp == null)
         {
-            Debug.LogError("Level Not found: " + level);
+            Debug.LogWarning("Level Not found: " + level);
             return;
         }
 

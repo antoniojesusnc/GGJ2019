@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class LevelManager : SingletonGameObject<LevelManager>
 {
+    // auto check
+    [SerializeField]
+    float _timeToAutoCheck;
+
+    float _timeStampAutoCheck;
+
+    Vector3 _lastCameraPosition;
+    Transform _cameraTransform;
+
+
     public class BadObjectsInfo
     {
         public BadObjects Obj { get; set; }
@@ -27,6 +37,12 @@ public class LevelManager : SingletonGameObject<LevelManager>
     {
         FillObjects();
         ElapsedTime = 0;
+
+
+        // autocheck
+        _timeStampAutoCheck = 0;
+        _cameraTransform = Camera.main.transform;
+        _lastCameraPosition = _cameraTransform.position;
     }
 
     private void FillObjects()
@@ -40,19 +56,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
         {
             temp = new BadObjectsInfo();
             temp.Obj = objects[i];
-            temp.Points = new List<Vector3>();
-
-            bound = objects[i].GetComponent<Collider>().bounds;
-
-            temp.Points.Add(bound.center + new Vector3(bound.extents.x, bound.extents.y, bound.extents.z));
-            temp.Points.Add(bound.center + new Vector3(bound.extents.x, -bound.extents.y, bound.extents.z));
-            temp.Points.Add(bound.center + new Vector3(bound.extents.x, bound.extents.y, -bound.extents.z));
-            temp.Points.Add(bound.center + new Vector3(bound.extents.x, -bound.extents.y, -bound.extents.z));
-
-            temp.Points.Add(bound.center + new Vector3(-bound.extents.x, bound.extents.y, bound.extents.z));
-            temp.Points.Add(bound.center + new Vector3(-bound.extents.x, -bound.extents.y, bound.extents.z));
-            temp.Points.Add(bound.center + new Vector3(-bound.extents.x, bound.extents.y, -bound.extents.z));
-            temp.Points.Add(bound.center + new Vector3(-bound.extents.x, -bound.extents.y, -bound.extents.z));
+            temp.Points = objects[i].GetComponent<ActivableObjects>().GetPointsToCheck();
 
             _badObjects.Add(temp);
         }
@@ -77,12 +81,71 @@ public class LevelManager : SingletonGameObject<LevelManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            return;
         }
+
+        CheckIfDisableOutline();
+        CheckIfAutoCheck();
+    }
+
+    private void CheckIfDisableOutline()
+    {
+        bool hitInObject = false;
+
+        int layerToCheck =
+            1 << LayerMask.NameToLayer(LayerReference.ActiveObjects) |
+            1 << LayerMask.NameToLayer(LayerReference.StaticObjects) |
+            1 << LayerMask.NameToLayer(LayerReference.ToHide);
+
+        Vector3 cameraPosition = Camera.main.transform.position;
+        Ray ray = new Ray(cameraPosition, Vector3.forward);
+        RaycastHit hitInfo;
+
+        for (int i = _badObjects.Count - 1; i >= 0; --i)
+        {
+            if (!_badObjects[i].Obj.isActiveAndEnabled)
+                continue;
+
+            hitInObject = false;
+            for (int j = _badObjects[i].Points.Count - 1; !hitInObject && j >= 0; --j)
+            {
+                ray.direction = _badObjects[i].Points[j] - cameraPosition;
+                if (Physics.Raycast(ray, out hitInfo, float.MaxValue, layerToCheck))
+                {
+                    if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer(LayerReference.ToHide))
+                    {
+                        _badObjects[i].Obj.SetOutline(true);
+                        hitInObject = true;
+                    }
+                }
+            }
+            if (!hitInObject)
+            {
+                _badObjects[i].Obj.SetOutline(false);
+            }
+        }
+    }
+
+    private void CheckIfAutoCheck()
+    {
+        if (_lastCameraPosition == _cameraTransform.position)
+        {
+            _timeStampAutoCheck += Time.deltaTime;
+
+            if (_timeStampAutoCheck > _timeToAutoCheck)
+                CheckVictory();
+        }
+        else
+        {
+            _timeStampAutoCheck = 0;
+        }
+
+        _lastCameraPosition = _cameraTransform.position;
     }
 
     private void UpdateGameFinished()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) ||
+        if (Input.GetKeyDown(KeyCode.Escape) ||
             Input.GetKeyDown(KeyCode.Caret) ||
             Input.GetKeyDown(KeyCode.Space) ||
             Input.GetMouseButtonDown(0)
@@ -92,6 +155,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
 
     public void CheckVictory()
     {
+        _timeStampAutoCheck = 0;
         bool allObjectsHidden = CheckIfAllObjectsHidden();
 
         // victory
@@ -100,7 +164,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
             IsGameFinished = true;
             GUIGameManager.Instance.Victory();
             GameManager.Instance.UpdateBestTime(GameManager.Instance.CurrentLevel, ElapsedTime);
-            GameManager.Instance.SetLevelAsUnlock(GameManager.Instance.CurrentLevel+1);
+            GameManager.Instance.SetLevelAsUnlock(GameManager.Instance.CurrentLevel + 1);
         }
         else
         {
@@ -123,6 +187,9 @@ public class LevelManager : SingletonGameObject<LevelManager>
 
         for (int i = _badObjects.Count - 1; !hitAnyObject && i >= 0; --i)
         {
+            if (!_badObjects[i].Obj.isActiveAndEnabled)
+                continue;
+
             for (int j = _badObjects[i].Points.Count - 1; !hitAnyObject && j >= 0; --j)
             {
                 ray.direction = _badObjects[i].Points[j] - cameraPosition;
@@ -157,7 +224,11 @@ public class LevelManager : SingletonGameObject<LevelManager>
 
         for (int i = _badObjects.Count - 1; i >= 0; --i)
         {
+            if (!_badObjects[i].Obj.isActiveAndEnabled)
+                continue;
+
             var bound = _badObjects[i].Obj.GetComponent<Collider>().bounds;
+            Gizmos.color = Color.white;
             Gizmos.DrawWireCube(bound.center, bound.size);
 
             Vector3 cameraPosition = Camera.main.transform.position;
@@ -171,13 +242,13 @@ public class LevelManager : SingletonGameObject<LevelManager>
                     if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer(LayerReference.ToHide))
                     {
                         hitAnyObject = true;
-                        Debug.Log("Hit in: " + hitInfo.collider.name);
+                        //Debug.Log("Hit in: " + hitInfo.collider.name);
                         Gizmos.color = Color.red;
                     }
                 }
                 Gizmos.DrawLine(cameraPosition, _badObjects[i].Points[j]);
             }
-            Debug.Log("hitAnyObject: " + hitAnyObject);
+            //Debug.Log("hitAnyObject: " + hitAnyObject);
         }
     }
 }
