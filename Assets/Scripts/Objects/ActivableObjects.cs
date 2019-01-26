@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cakeslice;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -25,8 +26,12 @@ public class ActivableObjects : MonoBehaviour
 
     ObjectState _currentState;
 
+    Outline _outline;
+
     void Start()
     {
+        _outline = GetComponent<Outline>();
+
         _originalPosition = transform.position;
         _originalRotation = transform.rotation;
     }
@@ -54,5 +59,10 @@ public class ActivableObjects : MonoBehaviour
         yield return new WaitForSeconds(Math.Max(_timeMovement, _timeRotation));
 
         _currentState = initialState == ObjectState.Pos1 ? ObjectState.Pos2 : ObjectState.Pos1;
+    }
+
+    public void SetOutline(int color)
+    {
+        _outline.color = color;
     }
 }

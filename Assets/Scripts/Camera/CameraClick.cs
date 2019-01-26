@@ -8,11 +8,21 @@ public class CameraClick : MonoBehaviour
     const string ActiveObjectsLayerName = "ActiveObjects";
     const string WallsLayerName = "Walls";
 
+    const int OutlineNotSelected = 1;
+    const int OutlineSelected = 2;
+
     Camera _camera;
     Ray _ray;
 
     [SerializeField]
     List<Transform> _walls;
+
+    [SerializeField]
+    float _timeToShowWalls;
+    [SerializeField]
+    float _timeToHideWalls;
+
+    ActivableObjects _lastSelected;
 
     void Start()
     {
@@ -27,10 +37,7 @@ public class CameraClick : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ClickInActivableObjects();
-        }
+        CheckActivableObjects();
 
         DetectWalls();
     }
@@ -38,10 +45,22 @@ public class CameraClick : MonoBehaviour
     private void DetectWalls()
     {
         _walls.Sort(SortByCameraDistance);
+        /*
         _walls[0].gameObject.SetActive(false);
         _walls[1].gameObject.SetActive(false);
         _walls[2].gameObject.SetActive(true);
         _walls[3].gameObject.SetActive(true);
+        */
+
+        if (!LeanTween.isTweening(_walls[0].gameObject))
+            LeanTween.alpha(_walls[0].gameObject, 0, _timeToHideWalls);
+        if (!LeanTween.isTweening(_walls[1].gameObject))
+            LeanTween.alpha(_walls[1].gameObject, 0, _timeToHideWalls);
+
+        if(!LeanTween.isTweening(_walls[2].gameObject))
+            LeanTween.alpha(_walls[2].gameObject, 1, _timeToShowWalls);
+        if (!LeanTween.isTweening(_walls[3].gameObject))
+            LeanTween.alpha(_walls[3].gameObject, 1, _timeToShowWalls);
 
         return;
     }
@@ -59,15 +78,38 @@ public class CameraClick : MonoBehaviour
         return 0;
     }
 
-    private void ClickInActivableObjects()
+    private void CheckActivableObjects()
     {
         _ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
         if (Physics.Raycast(_ray, out hitInfo, float.MaxValue, 1 << LayerMask.NameToLayer(ActiveObjectsLayerName)))
         {
-            hitInfo.collider.GetComponent<ActivableObjects>().TouchObject();
-        }
+            var newActivableObject = hitInfo.collider.GetComponent<ActivableObjects>();
+            if (_lastSelected == null)
+            {
+                newActivableObject.SetOutline(OutlineNotSelected);
+            }
+            else if (_lastSelected.GetInstanceID() == newActivableObject.GetInstanceID())
+            {
+                _lastSelected.SetOutline(OutlineSelected);
+            }
+            else
+            {
+                _lastSelected.SetOutline(OutlineNotSelected);
+                newActivableObject.SetOutline(OutlineSelected);
+            }
 
-        //Debug.DrawRay(_camera.transform.position, )
+            if (Input.GetMouseButtonDown(0))
+                newActivableObject.TouchObject();
+
+            _lastSelected = newActivableObject;
+        }
+        else
+        {
+            if (_lastSelected != null)
+            {
+                _lastSelected.SetOutline(OutlineNotSelected);
+            }
+        }
     }
 }
