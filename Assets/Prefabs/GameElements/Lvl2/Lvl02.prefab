@@ -516,11 +516,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2012499769}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1744912, y: 0.08000183, z: -1.308}
-  m_LocalScale: {x: 0.0048116916, y: 0.008891525, z: 0.0035153902}
+  m_LocalPosition: {x: -1.3465945, y: -1.1229912, z: 1.0766847}
+  m_LocalScale: {x: 0.0069632735, y: 0.012867432, z: 0.0050873216}
   m_Children: []
-  m_Father: {fileID: 8765661391449250781}
-  m_RootOrder: 7
+  m_Father: {fileID: 8767337952518673412}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2012499771
 AudioSource:
@@ -1010,12 +1010,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765661390512832289}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.114, y: 1.261, z: -2.131}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.013024504, y: 0.5861009, z: -0.114325054}
+  m_LocalScale: {x: 1.447157, y: 1.447157, z: 1.447157}
   m_Children: []
-  m_Father: {fileID: 8765661391449250781}
-  m_RootOrder: 4
+  m_Father: {fileID: 8767337952518673412}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8349136819062276327
 MonoBehaviour:
@@ -1652,10 +1652,8 @@ Transform:
   - {fileID: 8765661392060385607}
   - {fileID: 8765661391924804747}
   - {fileID: 8765661391622767431}
-  - {fileID: 8765661390512832288}
   - {fileID: 8767337952518673412}
   - {fileID: 8765661391000934346}
-  - {fileID: 2012499770}
   - {fileID: 8765661391355154035}
   m_Father: {fileID: 8765661390906881185}
   m_RootOrder: 1
@@ -3533,7 +3531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 371e438affa335b4e9ddeea008378897, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 371e438affa335b4e9ddeea008378897, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3600,7 +3598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 17585c446fcacc949a766dbb8e13c17b, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 17585c446fcacc949a766dbb8e13c17b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4151,7 +4149,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1000011671376998, guid: 28fbc97a4e7e92144af43a4bd05be737, type: 3}
       propertyPath: m_Name
-      value: TinyFire
+      value: Particles
       objectReference: {fileID: 0}
     - target: {fileID: 1000011671376998, guid: 28fbc97a4e7e92144af43a4bd05be737, type: 3}
       propertyPath: m_Layer
@@ -4187,7 +4185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012166036088, guid: 28fbc97a4e7e92144af43a4bd05be737, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4000012166036088, guid: 28fbc97a4e7e92144af43a4bd05be737, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
