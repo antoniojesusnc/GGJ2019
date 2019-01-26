@@ -21,6 +21,12 @@ public class CameraControllerPolar : MonoBehaviour
     [Header("Scroll Speed")]
     float _scrollSpeed;
 
+    [Header("Fake Movement")]
+    [SerializeField]
+    bool _doFakeMovement;
+    [SerializeField]
+    Vector2 _fakeMovement;
+
     SphericalCoordinates _sphericalCoordinate;
 
     Vector2 _mov;
@@ -36,7 +42,18 @@ public class CameraControllerPolar : MonoBehaviour
 
     void Update()
     {
-        UpdateInput();
+        if (!_doFakeMovement)
+        {
+            if (!LevelManager.Instance.IsGamePaused)
+            {
+                UpdateInput();
+            }
+        }
+        else
+        {
+            _mov = _fakeMovement;
+        }
+
         UpdateMoveCamera();
     }
 

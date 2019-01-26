@@ -22,6 +22,9 @@ public class CameraClick : MonoBehaviour
     [SerializeField]
     float _timeToHideWalls;
 
+    [SerializeField]
+    bool _checkClicks;
+
     ActivableObjects _lastSelected;
 
     void Start()
@@ -37,7 +40,13 @@ public class CameraClick : MonoBehaviour
 
     void Update()
     {
-        CheckActivableObjects();
+        if (_checkClicks)
+        {
+            if (LevelManager.Instance.IsGamePaused)
+                return;
+
+            CheckActivableObjects();
+        }
 
         DetectWalls();
     }
@@ -45,24 +54,16 @@ public class CameraClick : MonoBehaviour
     private void DetectWalls()
     {
         _walls.Sort(SortByCameraDistance);
-        /*
-        _walls[0].gameObject.SetActive(false);
-        _walls[1].gameObject.SetActive(false);
-        _walls[2].gameObject.SetActive(true);
-        _walls[3].gameObject.SetActive(true);
-        */
 
         if (!LeanTween.isTweening(_walls[0].gameObject))
             LeanTween.alpha(_walls[0].gameObject, 0, _timeToHideWalls);
         if (!LeanTween.isTweening(_walls[1].gameObject))
             LeanTween.alpha(_walls[1].gameObject, 0, _timeToHideWalls);
 
-        if(!LeanTween.isTweening(_walls[2].gameObject))
+        if (!LeanTween.isTweening(_walls[2].gameObject))
             LeanTween.alpha(_walls[2].gameObject, 1, _timeToShowWalls);
         if (!LeanTween.isTweening(_walls[3].gameObject))
             LeanTween.alpha(_walls[3].gameObject, 1, _timeToShowWalls);
-
-        return;
     }
 
     private int SortByCameraDistance(Transform wall1, Transform wall2)

@@ -175,6 +175,8 @@ MonoBehaviour:
   _upDownAngleMinMax: {x: 0, y: 89}
   _speed: 2
   _scrollSpeed: 0
+  _doFakeMovement: 0
+  _fakeMovement: {x: 0, y: 0}
 --- !u!114 &1841979879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +196,7 @@ MonoBehaviour:
   - {fileID: 0}
   _timeToShowWalls: 0.1
   _timeToHideWalls: 0.5
+  _checkClicks: 0
 --- !u!114 &1841979880
 MonoBehaviour:
   m_ObjectHideFlags: 0
