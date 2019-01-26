@@ -45,7 +45,7 @@ public class GameManager : SingletonGameObject<GameManager>
 
             bool complete = true;
             if (i > 0)
-                complete = PlayerPrefs.GetInt(string.Format(KeyUnlockLevel, (i + 1)), 0) == 0 ? false : true;
+                complete = PlayerPrefs.GetInt(string.Format(KeyUnlockLevel, (i+1)), 0) == 0 ? false : true;
 
             _bestTimes.Add(new BestTimeInfo(i + 1, bestTime, complete));
         }
@@ -96,7 +96,7 @@ public class GameManager : SingletonGameObject<GameManager>
             return;
         }
         temp.Unlock = true;
-        PlayerPrefs.GetInt(string.Format(KeyUnlockLevel, level), 1);
+        PlayerPrefs.SetInt(string.Format(KeyUnlockLevel, level), 1);
     }
 
     private BestTimeInfo GetBestTimeInfo(int level)

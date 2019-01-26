@@ -8,16 +8,14 @@ public class CameraClick : MonoBehaviour
     const string ActiveObjectsLayerName = "ActiveObjects";
     const string WallsLayerName = "Walls";
 
-    const int OutlineNotSelected = 1;
-    const int OutlineSelected = 2;
+    readonly Color OutlineNotSelected = new Color(255.0f/255.0f, 125.0f/255.0f, 0.0f, 1.0f);
+    readonly Color OutlineSelected = Color.green;
 
     Camera _camera;
     Ray _ray;
 
     [SerializeField]
-    List<Transform> _walls;
-
-    HideWithWallObject _door; 
+    List<GameObject> _walls;
 
     [SerializeField]
     float _timeToShowWalls;
@@ -33,13 +31,14 @@ public class CameraClick : MonoBehaviour
     {
         _camera = GetComponent<Camera>();
 
+        if (_walls == null || _walls.Count <= 0 || _walls[0] == null)
+            _walls = new List<GameObject>( GameObject.FindGameObjectsWithTag("Walls"));
+
         for (int i = _walls.Count - 1; i >= 0; --i)
         {
-            if (!_walls[i].gameObject.activeSelf)
-                _walls[i].gameObject.SetActive(true);
+            if (!_walls[i].activeSelf)
+                _walls[i].SetActive(true);
         }
-
-        _door = FindObjectOfType<HideWithWallObject>();
     }
 
     void Update()
@@ -59,41 +58,24 @@ public class CameraClick : MonoBehaviour
     {
         _walls.Sort(SortByCameraDistance);
 
-        if (!LeanTween.isTweening(_walls[0].gameObject))
-        {
-            LeanTween.alpha(_walls[0].gameObject, 0, _timeToHideWalls);
-            if(_door.Wall.transform == _walls[0])
-                LeanTween.alpha(_door.gameObject, 0, _timeToHideWalls);
-        }
-        if (!LeanTween.isTweening(_walls[1].gameObject))
-        {
-            LeanTween.alpha(_walls[1].gameObject, 0, _timeToHideWalls);
-            if (_door.Wall.transform == _walls[1])
-                LeanTween.alpha(_door.gameObject, 0, _timeToHideWalls);
-        }
-
-        if (!LeanTween.isTweening(_walls[2].gameObject))
-        {
-            LeanTween.alpha(_walls[2].gameObject, 1, _timeToShowWalls);
-            if (_door.Wall.transform == _walls[2])
-                LeanTween.alpha(_door.gameObject, 1, _timeToHideWalls);
-        }
-        if (!LeanTween.isTweening(_walls[3].gameObject))
-        {
-            LeanTween.alpha(_walls[3].gameObject, 1, _timeToShowWalls);
-            if (_door.Wall.transform == _walls[3])
-                LeanTween.alpha(_door.gameObject, 1, _timeToHideWalls);
-        }
+        if (!LeanTween.isTweening(_walls[0]))
+            LeanTween.alpha(_walls[0], 0, _timeToHideWalls);
+        if (!LeanTween.isTweening(_walls[1]))
+            LeanTween.alpha(_walls[1], 0, _timeToHideWalls);
+        if (!LeanTween.isTweening(_walls[2]))
+            LeanTween.alpha(_walls[2], 1, _timeToShowWalls);
+        if (!LeanTween.isTweening(_walls[3]))
+            LeanTween.alpha(_walls[3], 1, _timeToShowWalls);
     }
 
-    private int SortByCameraDistance(Transform wall1, Transform wall2)
+    private int SortByCameraDistance(GameObject wall1, GameObject wall2)
     {
-        if (Vector3.Distance(_camera.transform.position, wall1.position) <
-            Vector3.Distance(_camera.transform.position, wall2.position))
+        if (Vector3.Distance(_camera.transform.position, wall1.transform.position) <
+            Vector3.Distance(_camera.transform.position, wall2.transform.position))
             return -1;
 
-        if (Vector3.Distance(_camera.transform.position, wall1.position) >
-            Vector3.Distance(_camera.transform.position, wall2.position))
+        if (Vector3.Distance(_camera.transform.position, wall1.transform.position) >
+            Vector3.Distance(_camera.transform.position, wall2.transform.position))
             return 1;
 
         return 0;

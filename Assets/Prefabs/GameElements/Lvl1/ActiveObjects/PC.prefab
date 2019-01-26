@@ -76,7 +76,7 @@ MonoBehaviour:
   _timeMovement: 2
   _timeRotation: 2
   _secondPosAndRot: {fileID: 3158399642213745597}
---- !u!114 &1879816736
+--- !u!114 &4961076255601260135
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,13 +85,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3158399642344508485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: 1
-  eraseRenderer: 0
-  originalLayer: 0
-  originalMaterials: []
+  outlineMode: 0
+  outlineColor: {r: 0.98039216, g: 0.8747652, b: 0.043137226, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &3158399641854365421
 PrefabInstance:
   m_ObjectHideFlags: 0

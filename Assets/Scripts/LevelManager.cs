@@ -38,7 +38,6 @@ public class LevelManager : SingletonGameObject<LevelManager>
         FillObjects();
         ElapsedTime = 0;
 
-
         // autocheck
         _timeStampAutoCheck = 0;
         _cameraTransform = Camera.main.transform;
