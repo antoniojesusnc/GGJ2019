@@ -4,18 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ObjectState
+public class ActivableObjectsIfCondition : MonoBehaviour
 {
-    Pos1,
-    Pos2,
-    Pos3,
-    None
-}
-
-public class ActivableObjects : MonoBehaviour
-{
-
-
     bool _inTransition;
 
     [SerializeField]
@@ -56,6 +46,12 @@ public class ActivableObjects : MonoBehaviour
 
     QuickOutline _outline;
 
+    [SerializeField]
+    ActivableObjects _objectToCheckCondition;
+
+    [SerializeField]
+    ObjectState _requiredCondition;
+
     void Start()
     {
         _outline = GetComponent<QuickOutline>();
@@ -72,7 +68,10 @@ public class ActivableObjects : MonoBehaviour
 
         if (_currentState == ObjectState.Pos1)
         {
-            StartCoroutine(MoveToCo(_secondPosAndRot.position, _secondPosAndRot.rotation, ObjectState.Pos2));
+            if(_objectToCheckCondition.GetState == _requiredCondition)
+                StartCoroutine(MoveToCo(_secondPosAndRot.position, _secondPosAndRot.rotation, ObjectState.Pos2));
+            else
+                StartCoroutine(MoveFailToCo(_secondPosAndRot.position, _secondPosAndRot.rotation, ObjectState.Pos1));
         }
         else if (_currentState == ObjectState.Pos2)
         {
@@ -95,6 +94,28 @@ public class ActivableObjects : MonoBehaviour
         LeanTween.rotate(gameObject, rotation.eulerAngles, _timeRotation).setEase(LeanTweenType.easeInOutQuart);
 
         yield return new WaitForSeconds(Math.Max(_timeMovement, _timeRotation));
+
+        _currentState = newState;
+        _inTransition = false;
+    }
+
+    private IEnumerator MoveFailToCo(Vector3 position, Quaternion rotation, ObjectState newState)
+    {
+        _inTransition = true;
+
+        Vector3 initialPos = transform.position;
+        Vector3 initalRotation = transform.eulerAngles;
+
+        Vector3 midPos = position - transform.position;
+        float stopTime = 0.5f;
+
+        LeanTween.move(gameObject, midPos, stopTime * _timeMovement).setEase(LeanTweenType.easeInOutQuart);
+        LeanTween.rotate(gameObject, rotation.eulerAngles, stopTime * _timeRotation).setEase(LeanTweenType.easeInOutQuart);
+
+        yield return new WaitForSeconds(stopTime);
+
+        LeanTween.move(gameObject, initialPos, stopTime * _timeMovement).setEase(LeanTweenType.easeInOutQuart);
+        LeanTween.rotate(gameObject, initalRotation, stopTime * _timeRotation).setEase(LeanTweenType.easeInOutQuart);
 
         _currentState = newState;
         _inTransition = false;
