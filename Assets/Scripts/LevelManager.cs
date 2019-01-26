@@ -14,6 +14,8 @@ public class LevelManager : SingletonGameObject<LevelManager>
     Vector3 _lastCameraPosition;
     Transform _cameraTransform;
 
+    [SerializeField]
+    GameObject _particleTemplate;
 
     public class BadObjectsInfo
     {
@@ -26,6 +28,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
 
 
     public bool IsGameFinished { get; set; }
+    public bool IsDoingFinishAnim { get; set; }
 
     List<BadObjectsInfo> _badObjects;
 
@@ -64,6 +67,9 @@ public class LevelManager : SingletonGameObject<LevelManager>
     // Update is called once per frame
     void Update()
     {
+        if (IsDoingFinishAnim)
+            return;
+
         if (IsGameFinished)
         {
             UpdateGameFinished();
@@ -85,6 +91,11 @@ public class LevelManager : SingletonGameObject<LevelManager>
 
         CheckIfDisableOutline();
         CheckIfAutoCheck();
+
+
+
+        if (Input.GetKeyDown(KeyCode.Q))
+            Victory();
     }
 
     private void CheckIfDisableOutline()
@@ -160,14 +171,66 @@ public class LevelManager : SingletonGameObject<LevelManager>
         // victory
         if (allObjectsHidden)
         {
-            IsGameFinished = true;
-            GUIGameManager.Instance.Victory();
-            GameManager.Instance.UpdateBestTime(GameManager.Instance.CurrentLevel, ElapsedTime);
-            GameManager.Instance.SetLevelAsUnlock(GameManager.Instance.CurrentLevel + 1);
+            Victory();
         }
         else
         {
             GUIGameManager.Instance.ShowMessage("You didn't hide properly the " + _lastObjectDetected.Obj.name);
+        }
+    }
+
+    private void Victory()
+    {
+        IsGameFinished = true;
+        IsDoingFinishAnim = true;
+        GameManager.Instance.UpdateBestTime(GameManager.Instance.CurrentLevel, ElapsedTime);
+        GameManager.Instance.SetLevelAsUnlock(GameManager.Instance.CurrentLevel + 1);
+
+        StartCoroutine(StartVictoryAnimCo());
+    }
+
+    private IEnumerator StartVictoryAnimCo()
+    {
+        Vector2 speed = new Vector2(0.5f, 0.05f);
+        float zoomSpeed = 1.5f;
+        float waitTime = 6;
+
+
+        float waitForDissapear = 1f;
+        float timeToDissapear = 2f;
+
+        Camera.main.GetComponent<CameraControllerPolar>().SetFakeMovement(speed, zoomSpeed);
+
+        LTSeq sequence;
+
+        for (int i = _badObjects.Count - 1; i >= 0; --i)
+        {
+            sequence = LeanTween.sequence();
+            sequence.append(waitForDissapear);
+            //sequence.append(LeanTween.alpha(_badObjects[i].Obj.gameObject, 0, timeToDissapear));
+            sequence.append(LeanTween.color(_badObjects[i].Obj.gameObject, Color.clear, timeToDissapear));
+            LeanTween.delayedCall(waitForDissapear + timeToDissapear * 0.5f, CreateParticles);
+
+            _badObjects[i].Obj.SetOutline(false);
+        }
+
+        yield return new WaitForSeconds(waitTime);
+
+        IsDoingFinishAnim = false;
+        GUIGameManager.Instance.Victory();
+    }
+
+    private void CreateParticles()
+    {
+        float timeToDestroyParticle = 2f;
+
+        GameObject newParticle = null;
+        for (int i = _badObjects.Count - 1; i >= 0; --i)
+        {
+            newParticle = Instantiate(_particleTemplate, _badObjects[i].Obj.transform.position, Quaternion.identity, transform);
+            Destroy(newParticle, timeToDestroyParticle);
+
+            Destroy(_badObjects[i].Obj.gameObject, 0.5f);
         }
     }
 

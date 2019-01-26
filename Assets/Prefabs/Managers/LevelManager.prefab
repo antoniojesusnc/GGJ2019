@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07339323cb0ae8c48a3660b401e74d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeToAutoCheck: 3
+  _particleTemplate: {fileID: 1000011929668116, guid: feded0465999c1548bda62e4c1777240,
+    type: 3}
+  _showGizmos: 0
