@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d1d807e08237ca04fb387f6ddde3ee0a
+guid: 4fda745fc6959494f983949f9273c053
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,7 +8,7 @@ ModelImporter:
     2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Box104
+    4300000: PizzaCardboard
   externalObjects: {}
   materials:
     importMaterials: 1
