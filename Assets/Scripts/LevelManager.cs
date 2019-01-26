@@ -59,7 +59,10 @@ public class LevelManager : SingletonGameObject<LevelManager>
     void Update()
     {
         if (IsGameFinished)
+        {
             UpdateGameFinished();
+            return;
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Space))
