@@ -464,13 +464,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339888775}
   m_CullTransparentMesh: 0
---- !u!4 &405326941 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5060258090457568310, guid: 985ad45e125881642baf29b871136121,
-    type: 3}
-  m_PrefabInstance: {fileID: 5060258091202656379}
-  m_PrefabAsset: {fileID: 0}
---- !u!84 &519626425
+--- !u!84 &364548164
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -482,8 +476,8 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
-  m_Width: 1329
-  m_Height: 636
+  m_Width: 1319
+  m_Height: 620
   m_AntiAliasing: 1
   m_DepthFormat: 1
   m_ColorFormat: 7
@@ -502,6 +496,12 @@ RenderTexture:
     m_WrapW: 1
   m_Dimension: 2
   m_VolumeDepth: 1
+--- !u!4 &405326941 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5060258090457568310, guid: 985ad45e125881642baf29b871136121,
+    type: 3}
+  m_PrefabInstance: {fileID: 5060258091202656379}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &708351112 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5060258090001203346, guid: 985ad45e125881642baf29b871136121,
@@ -545,44 +545,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!4 &830428426 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5060258091405033828, guid: 985ad45e125881642baf29b871136121,
-    type: 3}
-  m_PrefabInstance: {fileID: 5060258091202656379}
-  m_PrefabAsset: {fileID: 0}
---- !u!84 &871893027
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_Width: 1329
-  m_Height: 636
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 7
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!84 &910036558
 RenderTexture:
   m_ObjectHideFlags: 0
@@ -690,6 +652,38 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &1230040899
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_Width: 1319
+  m_Height: 620
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 7
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &47391742511323754
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -791,7 +785,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _walls.Array.data[2]
       value: 
-      objectReference: {fileID: 830428426}
+      objectReference: {fileID: 0}
     - target: {fileID: 47391742508003770, guid: fe00c5fe312fc3e4ea1fef92c98d6858,
         type: 3}
       propertyPath: _walls.Array.data[3]
@@ -801,7 +795,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 519626425}
+      objectReference: {fileID: 364548164}
+    - target: {fileID: 1574645101317020588, guid: fe00c5fe312fc3e4ea1fef92c98d6858,
+        type: 3}
+      propertyPath: _speed
+      value: 1.7
+      objectReference: {fileID: 0}
     - target: {fileID: 788626392, guid: fe00c5fe312fc3e4ea1fef92c98d6858, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -881,5 +880,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2249983472203049936, guid: 985ad45e125881642baf29b871136121,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249983472203049936, guid: 985ad45e125881642baf29b871136121,
+        type: 3}
+      propertyPath: m_TagString
+      value: Walls
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249983472203347952, guid: 985ad45e125881642baf29b871136121,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.239
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249983472203347952, guid: 985ad45e125881642baf29b871136121,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.159
+      objectReference: {fileID: 0}
+    - target: {fileID: 2249983472201053456, guid: 985ad45e125881642baf29b871136121,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cd98506c85727524d86540d617805deb, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 985ad45e125881642baf29b871136121, type: 3}
