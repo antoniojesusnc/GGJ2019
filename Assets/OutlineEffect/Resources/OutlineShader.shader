@@ -186,18 +186,16 @@ Shader "Hidden/OutlineEffect"
 					half4 sample7 = tex2D(_OutlineSource, uv + float2(_LineThicknessX, -_LineThicknessY));
 					half4 sample8 = tex2D(_OutlineSource, uv + float2(-_LineThicknessX, _LineThicknessY));
 
-					if (sample1.r > h || sample2.r > h || sample3.r > h || sample4.r > h ||
-						sample5.r > h || sample6.r > h || sample7.r > h || sample8.r > h)
+					if (sample1.b > h || sample2.b > h || sample3.b > h || sample4.b > h ||
+						sample5.b > h || sample6.b > h || sample7.b > h || sample8.b > h)
 					{
-					
-						outline = _LineColor1 * _LineIntensity * _LineColor1.a;
+						outline = _LineColor3 * _LineIntensity * _LineColor3.a;
 						if (outsideDark)
-							originalPixel *= 1 - _LineColor1.a;
+							originalPixel *= 1 - _LineColor3.a;
 						hasOutline = true;
 
 						if (!outside)
-							outline *= _FillAmount1;
-							
+							outline *= _FillAmount3;
 					}
 					else if (sample1.g > h || sample2.g > h || sample3.g > h || sample4.g > h ||
 						sample5.g > h || sample6.g > h || sample7.g > h || sample8.g > h)
@@ -210,16 +208,17 @@ Shader "Hidden/OutlineEffect"
 						if (!outside)
 							outline *= _FillAmount2;
 					}
-					else if (sample1.b > h || sample2.b > h || sample3.b > h || sample4.b > h ||
-						sample5.b > h || sample6.b > h || sample7.b > h || sample8.b > h)
+					else if (sample1.r > h || sample2.r > h || sample3.r > h || sample4.r > h ||
+						sample5.r > h || sample6.r > h || sample7.r > h || sample8.r > h)
 					{
-						outline = _LineColor3 * _LineIntensity * _LineColor3.a;
+					
+						outline = _LineColor1 * _LineIntensity * _LineColor1.a;
 						if (outsideDark)
-							originalPixel *= 1 - _LineColor3.a;
+							originalPixel *= 1 - _LineColor1.a;
 						hasOutline = true;
 
 						if (!outside)
-							outline *= _FillAmount3;
+							outline *= _FillAmount1;
 					}
 
 					/*
@@ -229,17 +228,8 @@ Shader "Hidden/OutlineEffect"
 				}
 				else
 				{
-					if (sample1.r > h || sample2.r > h || sample3.r > h || sample4.r > h)
-					{
-						outline = _LineColor1 * _LineIntensity * _LineColor1.a;
-						if (outsideDark)
-							originalPixel *= 1 - _LineColor1.a;
-						hasOutline = true;
-
-						if (!outside)
-							outline *= _FillAmount1;
-					}
-					else if (sample1.g > h || sample2.g > h || sample3.g > h || sample4.g > h)
+					
+					if (sample1.g > h || sample2.g > h || sample3.g > h || sample4.g > h)
 					{
 						outline = _LineColor2 * _LineIntensity * _LineColor2.a;
 						if (outsideDark)
@@ -258,6 +248,16 @@ Shader "Hidden/OutlineEffect"
 
 						if (!outside)
 							outline *= _FillAmount3;
+					}
+					else if (sample1.r > h || sample2.r > h || sample3.r > h || sample4.r > h)
+					{
+						outline = _LineColor1 * _LineIntensity * _LineColor1.a;
+						if (outsideDark)
+							originalPixel *= 1 - _LineColor1.a;
+						hasOutline = true;
+
+						if (!outside)
+							outline *= _FillAmount1;
 					}
 					/*
 					if (!outside)

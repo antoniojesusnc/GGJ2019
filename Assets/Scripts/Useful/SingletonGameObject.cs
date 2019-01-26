@@ -43,8 +43,14 @@ public class SingletonGameObject<T> : MonoBehaviour where T : MonoBehaviour
             }
         }
     }
- 
- 
+
+    private void Awake()
+    {
+        if (Instance != null && Instance.GetInstanceID() != GetInstanceID())
+            Destroy(gameObject);
+    }
+
+
     private void OnApplicationQuit()
     {
         m_ShuttingDown = true;

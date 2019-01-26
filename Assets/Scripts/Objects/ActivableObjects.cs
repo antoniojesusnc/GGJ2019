@@ -27,11 +27,11 @@ public class ActivableObjects : MonoBehaviour
 
     ObjectState _currentState;
 
-    Outline _outline;
+    QuickOutline _outline;
 
     void Start()
     {
-        _outline = GetComponent<Outline>();
+        _outline = GetComponent<QuickOutline>();
 
         _originalPosition = transform.position;
         _originalRotation = transform.rotation;
@@ -62,10 +62,10 @@ public class ActivableObjects : MonoBehaviour
         _currentState = initialState == ObjectState.Pos1 ? ObjectState.Pos2 : ObjectState.Pos1;
     }
 
-    public void SetOutline(int color)
+    public void SetOutline(Color color)
     {
         if (_outline != null)
-            _outline.color = color;
+            _outline.OutlineColor = color;
         else
             Debug.Log("Uou have to add the outline");
     }
