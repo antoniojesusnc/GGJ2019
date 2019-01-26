@@ -12,16 +12,17 @@ public class CameraClick : MonoBehaviour
     Ray _ray;
 
     [SerializeField]
-    Transform[] _wallDetectors;
-
-    List<Transform> _wallDisabled;
-    
-[SerializeField]
     List<Transform> _walls;
 
     void Start()
     {
         _camera = GetComponent<Camera>();
+
+        for (int i = _walls.Count - 1; i >= 0; --i)
+        {
+            if (!_walls[i].gameObject.activeSelf)
+                _walls[i].gameObject.SetActive(true);
+        }
     }
 
     void Update()
@@ -31,8 +32,7 @@ public class CameraClick : MonoBehaviour
             ClickInActivableObjects();
         }
 
-        if (_wallDetectors != null && _wallDetectors.Length > 0)
-            DetectWalls();
+        DetectWalls();
     }
 
     private void DetectWalls()
@@ -44,18 +44,6 @@ public class CameraClick : MonoBehaviour
         _walls[3].gameObject.SetActive(true);
 
         return;
-
-
-        for (int i = _wallDetectors.Length - 1; i >= 0; --i)
-        {
-            _ray = _camera.ScreenPointToRay(_wallDetectors[i].position - _camera.transform.position);
-            RaycastHit hitInfo;
-            if (Physics.Raycast(_ray, out hitInfo, float.MaxValue, LayerMask.NameToLayer(WallsLayerName)))
-            {
-                hitInfo.collider.gameObject.SetActive(false);
-                _wallDisabled.Add(hitInfo.collider.transform);
-            }
-        }
     }
 
     private int SortByCameraDistance(Transform wall1, Transform wall2)
@@ -73,11 +61,13 @@ public class CameraClick : MonoBehaviour
 
     private void ClickInActivableObjects()
     {
-        _ray = _camera.ScreenPointToRay(_camera.transform.forward);
+        _ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
-        if (Physics.Raycast(_ray, out hitInfo, float.MaxValue, LayerMask.NameToLayer(ActiveObjectsLayerName)))
+        if (Physics.Raycast(_ray, out hitInfo, float.MaxValue, 1 << LayerMask.NameToLayer(ActiveObjectsLayerName)))
         {
             hitInfo.collider.GetComponent<ActivableObjects>().TouchObject();
         }
+
+        //Debug.DrawRay(_camera.transform.position, )
     }
 }
