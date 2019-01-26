@@ -44,7 +44,7 @@ public class CameraControllerPolar : MonoBehaviour
     {
         if (!_doFakeMovement)
         {
-            if (!LevelManager.Instance.IsGamePaused)
+            if (!LevelManager.Instance.IsGameFinished)
             {
                 UpdateInput();
             }

@@ -15,7 +15,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
     bool _showGizmos;
 
 
-    public bool IsGamePaused { get; set; }
+    public bool IsGameFinished { get; set; }
 
     List<BadObjectsInfo> _badObjects;
 
@@ -39,7 +39,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
             temp.Obj = objects[i];
             temp.Points = new List<Vector3>();
 
-            bound = objects[i].GetComponent<MeshCollider>().bounds;
+            bound = objects[i].GetComponent<Collider>().bounds;
 
             temp.Points.Add(bound.center + new Vector3(bound.extents.x, bound.extents.y, bound.extents.z));
             temp.Points.Add(bound.center + new Vector3(bound.extents.x, -bound.extents.y, bound.extents.z));
@@ -58,6 +58,10 @@ public class LevelManager : SingletonGameObject<LevelManager>
     // Update is called once per frame
     void Update()
     {
+        if (IsGameFinished)
+            UpdateGameFinished();
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CheckVictory();
@@ -69,13 +73,23 @@ public class LevelManager : SingletonGameObject<LevelManager>
         }
     }
 
+    private void UpdateGameFinished()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape) ||
+            Input.GetKeyDown(KeyCode.Caret) ||
+            Input.GetKeyDown(KeyCode.Space) ||
+            Input.GetMouseButtonDown(0)
+            )
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
     public void CheckVictory()
     {
         bool allObjectsHidden = CheckIfAllObjectsHidden();
 
         if (allObjectsHidden)
         {
-            IsGamePaused = true;
+            IsGameFinished = true;
             GUIGameManager.Instance.Victory();
         }
         else
@@ -133,7 +147,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
 
         for (int i = _badObjects.Count - 1; i >= 0; --i)
         {
-            var bound = _badObjects[i].Obj.GetComponent<MeshCollider>().bounds;
+            var bound = _badObjects[i].Obj.GetComponent<Collider>().bounds;
             Gizmos.DrawWireCube(bound.center, bound.size);
 
             Vector3 cameraPosition = Camera.main.transform.position;
