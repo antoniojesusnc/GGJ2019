@@ -5,16 +5,63 @@ using UnityEngine;
 
 public class LevelManager : SingletonGameObject<LevelManager>
 {
-    public bool IsGamePaused { get; set; }
+    public class BadObjectsInfo
+    {
+        public BadObjects Obj { get; set; }
+        public List<Vector3> Points { get; set; }
+    }
+
+    [SerializeField]
+    bool _showGizmos;
+
+
+    public bool IsGameFinished { get; set; }
+
+    List<BadObjectsInfo> _badObjects;
+
+    BadObjectsInfo _lastObjectDetected;
 
     void Start()
     {
-        
+        FillObjects();
+    }
+
+    private void FillObjects()
+    {
+        _badObjects = new List<BadObjectsInfo>();
+
+        BadObjectsInfo temp;
+        var objects = FindObjectsOfType<BadObjects>();
+        Bounds bound;
+        for (int i = objects.Length - 1; i >= 0; --i)
+        {
+            temp = new BadObjectsInfo();
+            temp.Obj = objects[i];
+            temp.Points = new List<Vector3>();
+
+            bound = objects[i].GetComponent<Collider>().bounds;
+
+            temp.Points.Add(bound.center + new Vector3(bound.extents.x, bound.extents.y, bound.extents.z));
+            temp.Points.Add(bound.center + new Vector3(bound.extents.x, -bound.extents.y, bound.extents.z));
+            temp.Points.Add(bound.center + new Vector3(bound.extents.x, bound.extents.y, -bound.extents.z));
+            temp.Points.Add(bound.center + new Vector3(bound.extents.x, -bound.extents.y, -bound.extents.z));
+
+            temp.Points.Add(bound.center + new Vector3(-bound.extents.x, bound.extents.y, bound.extents.z));
+            temp.Points.Add(bound.center + new Vector3(-bound.extents.x, -bound.extents.y, bound.extents.z));
+            temp.Points.Add(bound.center + new Vector3(-bound.extents.x, bound.extents.y, -bound.extents.z));
+            temp.Points.Add(bound.center + new Vector3(-bound.extents.x, -bound.extents.y, -bound.extents.z));
+
+            _badObjects.Add(temp);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (IsGameFinished)
+            UpdateGameFinished();
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             CheckVictory();
@@ -26,58 +73,101 @@ public class LevelManager : SingletonGameObject<LevelManager>
         }
     }
 
+    private void UpdateGameFinished()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape) ||
+            Input.GetKeyDown(KeyCode.Caret) ||
+            Input.GetKeyDown(KeyCode.Space) ||
+            Input.GetMouseButtonDown(0)
+            )
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
     public void CheckVictory()
     {
         bool allObjectsHidden = CheckIfAllObjectsHidden();
 
         if (allObjectsHidden)
         {
-            IsGamePaused = true;
+            IsGameFinished = true;
             GUIGameManager.Instance.Victory();
+        }
+        else
+        {
+            GUIGameManager.Instance.ShowMessage("You didn't hide properly the " + _lastObjectDetected.Obj.name);
         }
     }
 
     private bool CheckIfAllObjectsHidden()
     {
-        var badObjects = GameObject.FindObjectsOfType<BadObjects>();
-        for (int i = badObjects.Length - 1; i >= 0; --i)
+        bool hitAnyObject = false;
+
+        int layerToCheck =
+            1 << LayerMask.NameToLayer(LayerReference.ActiveObjects) |
+            1 << LayerMask.NameToLayer(LayerReference.StaticObjects) |
+            1 << LayerMask.NameToLayer(LayerReference.ToHide);
+
+        Vector3 cameraPosition = Camera.main.transform.position;
+        Ray ray = new Ray(cameraPosition, Vector3.forward);
+        RaycastHit hitInfo;
+
+        for (int i = _badObjects.Count - 1; !hitAnyObject && i >= 0; --i)
         {
-            //badObjects[i].GetComponent<Renderer>().bounds.
+            for (int j = _badObjects[i].Points.Count - 1; !hitAnyObject && j >= 0; --j)
+            {
+                ray.direction = _badObjects[i].Points[j] - cameraPosition;
+                if (Physics.Raycast(ray, out hitInfo, float.MaxValue, layerToCheck))
+                {
+                    if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer(LayerReference.ToHide))
+                    {
+                        hitAnyObject = true;
+                        _lastObjectDetected = _badObjects[i];
+                    }
+                }
+            }
         }
 
-        return false;
+        return !hitAnyObject;
     }
 
     private void OnDrawGizmos()
     {
+        if (!_showGizmos)
+            return;
+
+        if (_badObjects == null)
+            return;
+
         bool hitAnyObject = false;
-        var badObjects = GameObject.FindObjectsOfType<BadObjects>();
-        for (int i = badObjects.Length - 1;!hitAnyObject && i >= 0; --i)
+        int layerToCheck =
+            1 << LayerMask.NameToLayer(LayerReference.ActiveObjects) |
+            1 << LayerMask.NameToLayer(LayerReference.StaticObjects) |
+            1 << LayerMask.NameToLayer(LayerReference.ToHide);
+
+
+        for (int i = _badObjects.Count - 1; i >= 0; --i)
         {
-            var bound = badObjects[i].GetComponent<MeshCollider>().bounds;
+            var bound = _badObjects[i].Obj.GetComponent<Collider>().bounds;
             Gizmos.DrawWireCube(bound.center, bound.size);
 
-            List<Vector3> points = new List<Vector3>();
-            points.Add(bound.center + new Vector3(bound.extents.x, bound.extents.y, bound.extents.z));
-            points.Add(bound.center + new Vector3(bound.extents.x, -bound.extents.y, bound.extents.z));
-            points.Add(bound.center + new Vector3(bound.extents.x, bound.extents.y, -bound.extents.z));
-            points.Add(bound.center + new Vector3(bound.extents.x, -bound.extents.y, -bound.extents.z));
-
-            points.Add(bound.center + new Vector3(-bound.extents.x, bound.extents.y, bound.extents.z));
-            points.Add(bound.center + new Vector3(-bound.extents.x, -bound.extents.y, bound.extents.z));
-            points.Add(bound.center + new Vector3(-bound.extents.x, bound.extents.y, -bound.extents.z));
-            points.Add(bound.center + new Vector3(-bound.extents.x, -bound.extents.y, -bound.extents.z));
-
             Vector3 cameraPosition = Camera.main.transform.position;
-            for (int j = points.Count - 1;!hitAnyObject && j >= 0; --j)
+            for (int j = _badObjects[i].Points.Count - 1; j >= 0; --j)
             {
-                Gizmos.DrawLine(cameraPosition, points[j]);
-                if (Physics.Raycast(cameraPosition, points[j], float.MaxValue, 1 <<LayerMask.NameToLayer("BadObjects")))
-                    hitAnyObject = true;
-
+                Ray ray = new Ray(cameraPosition, _badObjects[i].Points[j] - cameraPosition);
+                RaycastHit hitInfo;
+                Gizmos.color = Color.white;
+                if (Physics.Raycast(ray, out hitInfo, float.MaxValue, layerToCheck))
+                {
+                    if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer(LayerReference.ToHide))
+                    {
+                        hitAnyObject = true;
+                        Debug.Log("Hit in: " + hitInfo.collider.name);
+                        Gizmos.color = Color.red;
+                    }
+                }
+                Gizmos.DrawLine(cameraPosition, _badObjects[i].Points[j]);
             }
-
-            Debug.Log("hitAnyObject: "+ hitAnyObject);
+            Debug.Log("hitAnyObject: " + hitAnyObject);
         }
     }
 }

@@ -5,17 +5,24 @@ using UnityEngine;
 public class GUIGameManager : SingletonGameObject<GUIGameManager>
 {
     [SerializeField]
-    GameObject _victoryMessage;
-    
+    GameObject _victoryDialog;
+
+    [SerializeField]
+    GUIMessageSystem _messageSystem;
+
     void Start()
     {
-        if (_victoryMessage.activeSelf)
-            _victoryMessage.SetActive(false);
+        if (_victoryDialog.activeSelf)
+            _victoryDialog.SetActive(false);
     }
 
     public void Victory()
     {
-        _victoryMessage.gameObject.SetActive(true);
+        _victoryDialog.gameObject.SetActive(true);
+    }
 
+    public void ShowMessage(string text)
+    {
+        _messageSystem.ShowMessage(text);
     }
 }

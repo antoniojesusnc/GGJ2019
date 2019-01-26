@@ -42,7 +42,7 @@ public class CameraClick : MonoBehaviour
     {
         if (_checkClicks)
         {
-            if (LevelManager.Instance.IsGamePaused)
+            if (LevelManager.Instance.IsGameFinished)
                 return;
 
             CheckActivableObjects();
