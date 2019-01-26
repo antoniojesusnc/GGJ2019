@@ -58,10 +58,12 @@ public class CameraClick : MonoBehaviour
     {
         _walls.Sort(SortByCameraDistance);
 
+        float alphaDestination = 0.15f;
+
         if (!LeanTween.isTweening(_walls[0]))
-            LeanTween.alpha(_walls[0], 0, _timeToHideWalls);
+            LeanTween.alpha(_walls[0], alphaDestination, _timeToHideWalls);
         if (!LeanTween.isTweening(_walls[1]))
-            LeanTween.alpha(_walls[1], 0, _timeToHideWalls);
+            LeanTween.alpha(_walls[1], alphaDestination, _timeToHideWalls);
         if (!LeanTween.isTweening(_walls[2]))
             LeanTween.alpha(_walls[2], 1, _timeToShowWalls);
         if (!LeanTween.isTweening(_walls[3]))
