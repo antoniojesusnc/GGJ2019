@@ -96,8 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pivotPoint: {fileID: 0}
-  _minAngle: {x: 1, y: 1}
-  _maxAngle: {x: 94, y: 89}
+  _upDownAngleMinMax: {x: 0, y: 89}
   _speed: 2
-  _scrollSpeed: 2
-  _distanceToPivot: 0
+  _scrollSpeed: 0
