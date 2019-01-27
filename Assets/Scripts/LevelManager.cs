@@ -200,7 +200,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
     private void Victory()
     {
 
-        AudioManager.Instance.StopSound(AudioManager.ClipBackground);
+        AudioManager.Instance.StopSound(AudioManager.ClipEndGame);
 
         IsGameFinished = true;
         IsDoingFinishAnim = true;

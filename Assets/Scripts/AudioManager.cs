@@ -6,6 +6,7 @@ using UnityEngine;
 public class AudioManager : SingletonGameObject<AudioManager>
 {
     public const string ClipBackground = "ClipBackground";
+    public const string ClipEndGame = "ClipEndGame";
     public const string ClipActivableObj = "ClipActivableObj";
     public const string ClipButtonSound = "ClipButtonSound";
 
