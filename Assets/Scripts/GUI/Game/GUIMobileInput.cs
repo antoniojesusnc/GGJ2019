@@ -11,7 +11,7 @@ public class GUIMobileInput : MonoBehaviour
 
     void Start()
     {
-#if UNITY_EDITOR || UNITY_ANDROID || UNITY_IOS
+#if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_IOS)
         _camera = FindObjectOfType<CameraControllerPolar>();
 #else
         gameObject.SetActive(false);

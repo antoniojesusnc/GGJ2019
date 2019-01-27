@@ -70,6 +70,8 @@ public class ActivableObjects : MonoBehaviour
         if (_inTransition)
             return;
 
+        AudioManager.Instance.PlaySound(AudioManager.ClipActivableObj, transform.position, false);
+
         if (_currentState == ObjectState.Pos1)
         {
             StartCoroutine(MoveToNextStateCo(_secondPosAndRot.position, _secondPosAndRot.rotation, ObjectState.Pos2));

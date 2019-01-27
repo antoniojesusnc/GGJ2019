@@ -26,6 +26,7 @@ public class GUIStartButton : MonoBehaviour
 
     private void GoToFirstLevel()
     {
+
         FindObjectOfType<GUIMainMenu>().LoadLevel(1);
     }
 }

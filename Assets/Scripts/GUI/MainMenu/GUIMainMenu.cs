@@ -19,6 +19,8 @@ public class GUIMainMenu : MonoBehaviour
             return;
         }
 
+        AudioManager.Instance.PlaySound(AudioManager.ClipButtonSound, Vector3.zero, false);
+
         GameManager.Instance.CurrentLevel = levelNumber;
         UnityEngine.SceneManagement.SceneManager.LoadScene(levelNumber);
     }
