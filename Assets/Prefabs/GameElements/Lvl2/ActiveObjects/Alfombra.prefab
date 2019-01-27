@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 449730954045016266}
   - component: {fileID: 449730954045016267}
   - component: {fileID: 449730954045016264}
-  - component: {fileID: 449730954045016265}
   - component: {fileID: 449730954045016270}
   m_Layer: 9
   m_Name: AlfombraBAD
@@ -94,22 +93,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &449730954045016265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449730954045016268}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: 1
-  eraseRenderer: 0
-  originalLayer: 0
-  originalMaterials: []
 --- !u!114 &449730954045016270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +108,8 @@ MonoBehaviour:
   _timeMovement: 1
   _timeRotation: 1
   _secondPosAndRot: {fileID: 449730954645870192}
+  _thirdPosAndRot: {fileID: 0}
+  _successState: 3
 --- !u!1 &449730954645870193
 GameObject:
   m_ObjectHideFlags: 0
