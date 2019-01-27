@@ -1,3 +1,5 @@
+![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Recurso_1)
+
 ![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Capture01.PNG)
 
 ![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Capture02.PNG)
@@ -14,7 +16,7 @@ Use Arrow keys to move for the screen. Click in the yellow objects to move them.
 
 ## Credits
 
-# Programing
+# Programming
 * [Antonio Jesus Narvaez](https://github.com/antoniojesusnc)
 * [Pau Bonet Vall-llebrera](https://github.com/BooLAW)
 
