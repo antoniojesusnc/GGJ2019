@@ -6,6 +6,7 @@ using UnityEngine;
 public class AudioManager : SingletonGameObject<AudioManager>
 {
     public const string ClipBackground = "ClipBackground";
+    public const string ClipEndGame = "ClipEndGame";
     public const string ClipActivableObj = "ClipActivableObj";
     public const string ClipButtonSound = "ClipButtonSound";
 
@@ -24,7 +25,7 @@ public class AudioManager : SingletonGameObject<AudioManager>
         _audiosPlaying = new List<AudioSource>();
     }
 
-    public void PlaySound(string name, Vector3 position, bool loopable = false)
+    public void PlaySound(string name, Vector3 position, bool loopable = false, float volume = 1)
     {
         if (_audios == null)
             return;
@@ -43,6 +44,7 @@ public class AudioManager : SingletonGameObject<AudioManager>
 
         newAudioSource.clip = clip;
         newAudioSource.loop = loopable;
+        newAudioSource.volume = volume;
         newAudioSource.Play();
 
         _audiosPlaying.Add(newAudioSource);

@@ -8,7 +8,7 @@ public class ActivableObjectsEnableGO : ActivableObjects
     {
         _secondPosAndRot.gameObject.SetActive(newState == ObjectState.Pos2);
 
+        yield return new WaitForSeconds(0.5f);
         _currentState = newState;
-        yield return 0;
     }
 }

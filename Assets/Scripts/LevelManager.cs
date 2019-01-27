@@ -46,7 +46,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
         _cameraTransform = Camera.main.transform;
         _lastCameraPosition = _cameraTransform.position;
 
-        AudioManager.Instance.PlaySound(AudioManager.ClipBackground, transform.position, true);
+        AudioManager.Instance.PlaySound(AudioManager.ClipBackground, transform.position, true, 0.7f);
     }
 
     private void FillObjects()
@@ -200,7 +200,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
     private void Victory()
     {
 
-        AudioManager.Instance.StopSound(AudioManager.ClipBackground);
+        AudioManager.Instance.StopSound(AudioManager.ClipEndGame);
 
         IsGameFinished = true;
         IsDoingFinishAnim = true;
