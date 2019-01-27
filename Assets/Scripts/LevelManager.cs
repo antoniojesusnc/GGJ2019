@@ -161,7 +161,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
             Input.GetMouseButtonDown(0)
             )
         {
-            if (UnityEngine.SceneManagement.SceneManager.sceneCount <= GameManager.Instance.CurrentLevel) {
+            if (UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings < GameManager.Instance.CurrentLevel+1) {
                 UnityEngine.SceneManagement.SceneManager.LoadScene(0);
             }
             else

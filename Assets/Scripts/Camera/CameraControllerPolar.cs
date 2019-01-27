@@ -29,15 +29,15 @@ public class CameraControllerPolar : MonoBehaviour
 
     SphericalCoordinates _sphericalCoordinate;
 
-    Vector2 _mov;
-    float _zoom;
+    public Vector2 Mov { get; set; }
+    public float _zoom { get; set; }
 
     void Start()
     {
         _camera = GetComponent<Camera>();
 
         _sphericalCoordinate = new SphericalCoordinates();
-        _mov = new Vector2();
+        Mov = new Vector2();
     }
 
     void Update()
@@ -51,7 +51,7 @@ public class CameraControllerPolar : MonoBehaviour
         }
         else
         {
-            _mov = _fakeMovement;
+            Mov = _fakeMovement;
         }
 
         UpdateMoveCamera();
@@ -62,7 +62,7 @@ public class CameraControllerPolar : MonoBehaviour
         float movX = Input.GetAxis("Horizontal");
         float movY = Input.GetAxis("Vertical");
 
-        _mov.Set(movX, movY);
+        Mov = new Vector2(movX, movY);
 
         bool ScrollUp = Input.GetKey(KeyCode.Z);
         bool ScrollDown = Input.GetKey(KeyCode.X);
@@ -85,8 +85,8 @@ public class CameraControllerPolar : MonoBehaviour
 
         transform.position = _sphericalCoordinate.toCartesian + _pivotPoint.position;
 
-        if (_mov.x != 0 || _mov.y != 0)
-            transform.position = _sphericalCoordinate.Rotate(_mov.x * _speed * Time.deltaTime, _mov.y * _speed * Time.deltaTime).toCartesian + _pivotPoint.position;
+        if (Mov.x != 0 || Mov.y != 0)
+            transform.position = _sphericalCoordinate.Rotate(Mov.x * _speed * Time.deltaTime, Mov.y * _speed * Time.deltaTime).toCartesian + _pivotPoint.position;
 
         // temporal zoom in, zoom out
        if (_zoom != 0)

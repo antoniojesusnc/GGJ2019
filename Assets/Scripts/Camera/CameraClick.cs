@@ -83,6 +83,7 @@ public class CameraClick : MonoBehaviour
     private void CheckActivableObjects()
     {
         _ray = _camera.ScreenPointToRay(Input.mousePosition);
+
         RaycastHit hitInfo;
         int layerMask =
             1 << LayerMask.NameToLayer(LayerReference.ActiveObjects) |

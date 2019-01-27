@@ -18,7 +18,7 @@ public class GUIMessage : MonoBehaviour
     public void ShowMessage(string message, float time)
     {
         gameObject.SetActive(true);
-        GetComponent<TMPro.TextMeshProUGUI>().text = message;
+        GetComponentInChildren<TMPro.TextMeshProUGUI>().text = message;
 
         StartCoroutine(AnimCo(time));
     }

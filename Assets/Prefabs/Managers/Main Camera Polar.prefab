@@ -189,14 +189,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0ad09df08c6e540bbb106eef92f358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _walls:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _walls: []
   _timeToShowWalls: 0.1
   _timeToHideWalls: 0.5
-  _checkClicks: 0
+  _checkClicks: 1
 --- !u!114 &1841979880
 MonoBehaviour:
   m_ObjectHideFlags: 0
