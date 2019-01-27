@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -198,7 +198,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TargetTexture
       value: 
-      objectReference: {fileID: 2139499544}
+      objectReference: {fileID: 854967473}
     - target: {fileID: 99862599, guid: fe00c5fe312fc3e4ea1fef92c98d6858, type: 3}
       propertyPath: m_havePropertiesChanged
       value: 1
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad96c82f3ab62d7408520a573df4dc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!84 &1854088602
+--- !u!84 &854967473
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,8 +266,8 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
-  m_Width: 493
-  m_Height: 246
+  m_Width: 1330
+  m_Height: 631
   m_AntiAliasing: 1
   m_DepthFormat: 1
   m_ColorFormat: 7
@@ -286,7 +286,7 @@ RenderTexture:
     m_WrapW: 1
   m_Dimension: 2
   m_VolumeDepth: 1
---- !u!84 &2139499544
+--- !u!84 &872774768
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,8 +298,8 @@ RenderTexture:
     Hash: 00000000000000000000000000000000
   m_ForcedFallbackFormat: 4
   m_DownscaleFallback: 0
-  m_Width: 493
-  m_Height: 246
+  m_Width: 1330
+  m_Height: 631
   m_AntiAliasing: 1
   m_DepthFormat: 1
   m_ColorFormat: 7
