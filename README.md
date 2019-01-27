@@ -1,4 +1,4 @@
-![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Recurso_1)
+![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Recurso_1.png)
 
 ![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Capture01.PNG)
 
