@@ -45,6 +45,8 @@ public class LevelManager : SingletonGameObject<LevelManager>
         _timeStampAutoCheck = 0;
         _cameraTransform = Camera.main.transform;
         _lastCameraPosition = _cameraTransform.position;
+
+        AudioManager.Instance.PlaySound(AudioManager.ClipBackground, transform.position, true);
     }
 
     private void FillObjects()
@@ -197,6 +199,9 @@ public class LevelManager : SingletonGameObject<LevelManager>
 
     private void Victory()
     {
+
+        AudioManager.Instance.StopSound(AudioManager.ClipBackground);
+
         IsGameFinished = true;
         IsDoingFinishAnim = true;
         GameManager.Instance.UpdateBestTime(GameManager.Instance.CurrentLevel, ElapsedTime);
