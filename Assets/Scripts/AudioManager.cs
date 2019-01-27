@@ -22,6 +22,8 @@ public class AudioManager : SingletonGameObject<AudioManager>
 
     public void PlaySound(string name, Vector3 position, bool loopable = false)
     {
+        if (_audios == null)
+            return;
 
         AudioClip clip = GetAudioclip(name);
         if (clip == null)
