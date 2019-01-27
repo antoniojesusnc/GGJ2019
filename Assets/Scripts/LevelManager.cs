@@ -46,7 +46,7 @@ public class LevelManager : SingletonGameObject<LevelManager>
         _cameraTransform = Camera.main.transform;
         _lastCameraPosition = _cameraTransform.position;
 
-        AudioManager.Instance.PlaySound(AudioManager.ClipBackground, transform.position, true);
+        AudioManager.Instance.PlaySound(AudioManager.ClipBackground, transform.position, true, 0.7f);
     }
 
     private void FillObjects()
