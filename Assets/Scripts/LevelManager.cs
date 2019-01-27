@@ -160,7 +160,17 @@ public class LevelManager : SingletonGameObject<LevelManager>
             Input.GetKeyDown(KeyCode.Space) ||
             Input.GetMouseButtonDown(0)
             )
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        {
+            if (UnityEngine.SceneManagement.SceneManager.sceneCount <= GameManager.Instance.CurrentLevel) {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            }
+            else
+            {
+                ++GameManager.Instance.CurrentLevel;
+                UnityEngine.SceneManagement.SceneManager.LoadScene(GameManager.Instance.CurrentLevel);
+            }
+
+        }
     }
 
     public void CheckVictory()
@@ -176,7 +186,10 @@ public class LevelManager : SingletonGameObject<LevelManager>
         }
         else
         {
-            GUIGameManager.Instance.ShowMessage("You didn't hide properly the " + _lastObjectDetected.Obj.name);
+            if(!allObjectsHidden)
+                GUIGameManager.Instance.ShowMessage("You didn't hide properly the " + _lastObjectDetected.Obj.name);
+            else
+                GUIGameManager.Instance.ShowMessage("Some Objects are not in a comfortable state");
         }
     }
 

@@ -5,10 +5,7 @@ using UnityEngine;
 
 public class CameraClick : MonoBehaviour
 {
-    const string ActiveObjectsLayerName = "ActiveObjects";
-    const string WallsLayerName = "Walls";
-
-    readonly Color OutlineNotSelected = new Color(255.0f/255.0f, 125.0f/255.0f, 0.0f, 1.0f);
+    readonly Color OutlineNotSelected = new Color(255.0f/255.0f, 255.0f/255.0f, 0.0f, 1.0f);
     readonly Color OutlineSelected = Color.green;
 
     Camera _camera;
@@ -87,9 +84,16 @@ public class CameraClick : MonoBehaviour
     {
         _ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
-        if (Physics.Raycast(_ray, out hitInfo, float.MaxValue, 1 << LayerMask.NameToLayer(ActiveObjectsLayerName)))
+        int layerMask =
+            1 << LayerMask.NameToLayer(LayerReference.ActiveObjects) |
+            1 << LayerMask.NameToLayer(LayerReference.StaticObjects);
+
+        if (Physics.Raycast(_ray, out hitInfo, float.MaxValue, layerMask))
         {
             var newActivableObject = hitInfo.collider.GetComponent<ActivableObjects>();
+            if (newActivableObject == null)
+                return;
+
             if (_lastSelected == null)
             {
                 newActivableObject.SetOutline(OutlineNotSelected);
