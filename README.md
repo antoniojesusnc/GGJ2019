@@ -1,8 +1,8 @@
 ![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Recurso_1.png)
 
-![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Capture01.PNG)
+![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Capture01.png)
 
-![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Capture02.PNG)
+![alt text](https://github.com/antoniojesusnc/GGJ2019/blob/master/ScreenShots/Capture02.png)
 
 ## Lawful Order
 Game Develop for the Global Game Jam in Barcelona with the Theme ["What home means to you"](https://globalgamejam.org/news/theme-global-game-jam-2019-%E2%80%A6)
