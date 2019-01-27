@@ -5,35 +5,34 @@ using UnityEngine;
 
 public class TouchController : SingletonGameObject<TouchController>
 {
-    
-
-    public struct TouchWrapper
-    {
-        Vector2 position;
-        Vector2 deltaPosition;
-        
-    }
-
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public bool GetTouch()
+    {
 #if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_IOS)
-        GetInput()
-#else 
-        GetMouse();
+            return Input.touchCount > 0;
+#else
+        return Input.GetMouseButtonDown(0);
 #endif
     }
 
-    private void GetMouse()
+    internal Vector3 GetTouchPosition()
     {
-        if (Input.GetMouseButton(0))
-        {
-
-        }
+#if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_IOS)
+        if (Input.touchCount > 0)
+            return Input.GetTouch(0).position;
+        else
+            return Vector3.zero * -1000;
+#else
+        return Input.mousePosition;
+#endif
     }
 }

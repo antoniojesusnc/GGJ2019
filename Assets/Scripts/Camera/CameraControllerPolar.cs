@@ -59,9 +59,9 @@ public class CameraControllerPolar : MonoBehaviour
 
     void UpdateInput()
     {
+#if UNITY_EDITOR || (!UNITY_ANDROID && !UNITY_IOS)
         float movX = Input.GetAxis("Horizontal");
         float movY = Input.GetAxis("Vertical");
-
         Mov = new Vector2(movX, movY);
 
         bool ScrollUp = Input.GetKey(KeyCode.Z);
@@ -72,6 +72,7 @@ public class CameraControllerPolar : MonoBehaviour
             _zoom = 1;
         else if (ScrollDown)
             _zoom = -1;
+#endif
     }
 
     void UpdateMoveCamera()

@@ -92,10 +92,11 @@ public class LevelManager : SingletonGameObject<LevelManager>
         CheckIfDisableOutline();
         CheckIfAutoCheck();
 
-
+        /*
 
         if (Input.GetKeyDown(KeyCode.Q))
             Victory();
+        */
     }
 
     private void CheckIfDisableOutline()
@@ -158,7 +159,8 @@ public class LevelManager : SingletonGameObject<LevelManager>
         if (Input.GetKeyDown(KeyCode.Escape) ||
             Input.GetKeyDown(KeyCode.Caret) ||
             Input.GetKeyDown(KeyCode.Space) ||
-            Input.GetMouseButtonDown(0)
+            Input.GetMouseButtonDown(0) ||
+            Input.touchCount > 0
             )
         {
             if (UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings < GameManager.Instance.CurrentLevel+1) {

@@ -82,7 +82,7 @@ public class CameraClick : MonoBehaviour
 
     private void CheckActivableObjects()
     {
-        _ray = _camera.ScreenPointToRay(Input.mousePosition);
+        _ray = _camera.ScreenPointToRay(TouchController.Instance.GetTouchPosition());
 
         RaycastHit hitInfo;
         int layerMask =
@@ -109,7 +109,7 @@ public class CameraClick : MonoBehaviour
                 newActivableObject.SetOutline(OutlineSelected);
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (TouchController.Instance.GetTouch())
                 newActivableObject.TouchObject();
 
             _lastSelected = newActivableObject;
